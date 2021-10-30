@@ -1,0 +1,60 @@
+---
+
+# First some tasks for all hosts 
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (Ubuntu)
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+# Now the web_servers
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install apache2 and php for ubuntu servers
+    apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Start apache2 server
+    service:
+      name: apache2
+      state: restarted
+
+
+# Now the db_servers
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install mariadb package (Ubuntu)
+    apt:
+      name: mariadb-server
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Start mariadb server
+    service:
+      name: mysql
+      state: started
+
+
+# And now the file_servers
+- hosts: file_servers
+  become: true
+  tasks:
+
+  - name: install samba 
+    package:        # Can use package instead of apt. package can work ubuntu and centos
+      name: samba
+      state: latest
+    when: ansible_distribution == "Ubuntu"

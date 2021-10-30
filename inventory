@@ -1,3 +1,8 @@
-180.44.0.55 apache_package=apache2
-180.44.0.66 apache_package=apache2
-180.44.0.77 apache_package=apache2
+[web_servers]
+180.44.0.55
+
+[db_servers]
+180.44.0.66 
+
+[file_servers]
+180.44.0.77 
