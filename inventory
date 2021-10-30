@@ -1,3 +1,3 @@
-180.44.0.55
-180.44.0.66
-180.44.0.77
+180.44.0.55 apache_package=apache2
+180.44.0.66 apache_package=apache2
+180.44.0.77 apache_package=apache2
