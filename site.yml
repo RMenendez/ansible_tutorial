@@ -13,6 +13,32 @@
     when: ansible_distribution == "Ubuntu"
 
 
+# Video13 managing users
+- hosts: all
+  become: true
+  tasks:
+  - name: create simone user
+    tags: always
+    user:
+      name: simone
+      group: root
+
+  - name: add ssh key for simone (use keycontainer)
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDxiENRv6uRTq9aD7Qg+mNPm2KqZ9DDc3YuPIHwRRfqwXwRi5jn3rmkObWGZgR7oO+JgUhxMNlJDTkoT49TaTYcLQofTjHBB70ryEoXHyi+FFCSlaSA5mV9QNj5/UUT8Z/MKRfh/YJeyD9BZ+0iUmw5lAM5TO/knKh2I4i2++Sd8RPQQT6NmRJRvTWkA8RtprCbYnyo5EFuKaGh0AMQTI65SbabFLZM8Rh1rrKoGzrim0hqWxw4MfiDDHnEwuMxeXKjTyidvzaU4IQgOJw6jv3HNZvs36MOxK+u9mEM8z87NYJsS9U/ohO+m5hJLAi+3Aq16ot2tCp1qXxtUyL6SvMFd53Zp48T7sktOQecCv3E4YgFMcuw4UaGmfIet34rnJvgwVQ+UdNGn5NmYJ0P2qs3ITIvyOe/JJ/JinAu2n7oNhCIJoggH0FW/ovZhfEhE8+mzqgWFkty5E6zLALBnw9R1JHAGKzevhuR2jkptObk8P4MuOY8Q65c4hnYEtc7td8= grillo@p2017"    
+
+  - name: add sudoers file for simone
+    tags: always
+    copy:
+      src: sudoer_simone
+      dest: /etc/sudoers.d/simone
+      owner: root
+      group: root
+      mode: 0440
+      
+
 # Now the web_servers
 - hosts: web_servers
   become: true
