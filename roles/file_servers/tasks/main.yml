@@ -1,0 +1,6 @@
+- name: install samba 
+  tags: samba
+  package:        # Can use package instead of apt. package can work ubuntu and centos
+    name: samba
+    state: latest
+  when: ansible_distribution == "Ubuntu"
