@@ -1,0 +1,21 @@
+---
+
+# Para ejecutar el python script en un host remoto del inventario OK funciona
+#AAA- hosts: web_servers  # Apuntando a 180.44.0.55 del entorno lab
+#AAA  become: true        # Para elevar permisos mediante sudo
+#AAA  tasks:
+#AAA
+#AAA  - name: Run a script using an executable in a system path
+#AAA    ansible.builtin.script: writefile.py "Hola_Amigo"
+#AAA    args:
+#AAA      executable: python3
+
+- hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Run a script using an executable in a system path but in localhost
+    ansible.builtin.script: writefile.py "Hola_Amigo"
+    args:
+      executable: python3
+
+
